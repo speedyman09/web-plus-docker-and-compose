@@ -146,14 +146,14 @@ const CollectionAddModal = ({
     e.preventDefault();
     errorMessage && setErrorMessage("");
 
-    const { name, image, description } = collectionData;
+    const { name, image } = collectionData;
     const itemsId = Object.entries(collectionData.wishes).map(([key, val]) => {
       if (val) {
         return +key;
       }
     });
 
-    addCollection({ name, image, itemsId, description })
+    addCollection({ name, image, itemsId})
       .then((res) => {
         const { name, image, id, owner } = res;
         setCollectionsList([...collectionsList, { name, image, id, owner }]);

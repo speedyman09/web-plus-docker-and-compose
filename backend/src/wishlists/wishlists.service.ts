@@ -22,12 +22,11 @@ export class WishlistsService {
   ) {}
 
   async create(createWishlistDto: CreateWishlistDto, user: User) {
-    const { name, items, description, image } = createWishlistDto;
+    const { name, items, image } = createWishlistDto;
     const wishes = await this.wishesService.findMany(items);
     return this.wishlistRepository.save({
       name,
       items: wishes,
-      description,
       image,
       owner: user,
     });
@@ -51,7 +50,7 @@ export class WishlistsService {
   }
 
   async update(id: number, updateWishlistDto: UpdateWishlistDto, user: User) {
-    const { name, items, description, image } = updateWishlistDto;
+    const { name, items, image } = updateWishlistDto;
     let wishes: Wish[];
     if (items) {
       wishes = await this.wishesService.findMany(items);
@@ -70,7 +69,6 @@ export class WishlistsService {
       id,
       name,
       items: wishes,
-      description,
       image,
     });
 

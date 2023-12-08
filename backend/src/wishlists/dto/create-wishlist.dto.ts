@@ -11,9 +11,6 @@ export class CreateWishlistDto {
   @IsString()
   name: string;
 
-  @IsString()
-  @Length(1500)
-  description: string;
 
   @IsString()
   image: string;
