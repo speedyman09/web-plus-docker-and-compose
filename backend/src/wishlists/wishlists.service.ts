@@ -22,8 +22,9 @@ export class WishlistsService {
   ) {}
 
   async create(createWishlistDto: CreateWishlistDto, user: User) {
-    const { name, items, image } = createWishlistDto;
-    const wishes = await this.wishesService.findMany(items);
+    const { name, itemsId, image } = createWishlistDto;
+    const wishes = await this.wishesService.findMany(itemsId);
+    console.log(createWishlistDto)
     return this.wishlistRepository.save({
       name,
       items: wishes,
@@ -50,10 +51,10 @@ export class WishlistsService {
   }
 
   async update(id: number, updateWishlistDto: UpdateWishlistDto, user: User) {
-    const { name, items, image } = updateWishlistDto;
+    const { name, itemsId, image } = updateWishlistDto;
     let wishes: Wish[];
-    if (items) {
-      wishes = await this.wishesService.findMany(items);
+    if (itemsId) {
+      wishes = await this.wishesService.findMany(itemsId);
     }
     const wishlist = await this.findOne(id);
 
